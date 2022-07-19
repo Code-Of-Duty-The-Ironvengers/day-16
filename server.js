@@ -5,34 +5,56 @@ app.set("view engine", "hbs");
 
 const listOfCountries = [
   { name: "Portugal", description: "" },
-  { name: "Taiwan", description: "" },
+  { name: "Taiwan", description: "Tiffany is from here" },
   { name: "Espain", description: "" },
   { name: "France", description: "" },
   { name: "Syria", description: "" },
-  { name: "Deutschshxhchshchsland", description: "" },
-  { name: "Neeeeiiiiderlaands", description: "" },
-  { name: "United Emirates - the Arab ones", description: "" },
-  { name: "Braaziiiiiiu", description: "" },
+  { name: "Germany", description: "" },
+  { name: "Netherlands", description: "" },
+  { name: "UAE", description: "" },
+  { name: "Brazil", description: "" },
   { name: "Lebanon", description: "" },
   { name: "India", description: "" },
-  { name: "Sviden", description: "" },
+  { name: "Sweeden", description: "" },
 ];
 
+const students = [
+  { name: "Kira", country: "Germany" },
+  { name: "Vicent", country: "Germany" },
+  { name: "Guillermo", country: "Espain" },
+  { name: "Daiane", country: "Brazil" },
+  { name: "Tony", country: "Netherlands" },
+  { name: "Asem", country: "Syria" },
+  { name: "Pelayo", country: "Espain" },
+  { name: "Maxime", country: "Netherlands" },
+  { name: "João", country: "Portugal" },
+  { name: "Tiffany", country: "Taiwan" },
+  { name: "Elvan", country: "Germany" },
+  { name: "Nico", country: "France" },
+  { name: "Diana", country: "France" },
+  { name: "Palash", country: "UAE" },
+  { name: "Filipe", country: "Sweeden" },
+];
 // HTTP Verb
 app.get("/", (req, res) => {
+  console.log(req.params);
   res.render("home-page-guten-tag", {
     list: listOfCountries,
   });
 });
 
 app.get("/about", (req, res) => {
+  console.log(req.params);
   res.render("about-page-hallo");
 });
 
-app.get("/wiki/:tonyG", (req, res) => {
-  const string = req.params.tonyG.split("-").join(" ");
-  console.log(req.params);
-  res.render("about-page-hallo", { string });
+app.get("/wiki/:boomerangFuturamaNissanQashqai", (req, res) => {
+  const countrySelected = listOfCountries.find((country) => {
+    return country.name === req.params.boomerangFuturamaNissanQashqai;
+  });
+  res.render("countries", {
+    description: countrySelected.description,
+  });
 });
 
 app.listen(3000, () => {
