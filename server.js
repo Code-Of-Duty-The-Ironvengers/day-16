@@ -38,8 +38,10 @@ const students = [
 // HTTP Verb
 app.get("/", (req, res) => {
   console.log(req.params);
+  console.log(req.query);
   res.render("home-page-guten-tag", {
     list: listOfCountries,
+    students,
   });
 });
 
@@ -47,6 +49,29 @@ app.get("/about", (req, res) => {
   console.log(req.params);
   res.render("about-page-hallo");
 });
+
+app.get("/:student", (req, res) => {
+  console.log(req.params);
+  console.log(req.query);
+  const theStudent = students.find(
+    (student) => student.name === req.params.student
+  );
+
+  const countryOfStudent = listOfCountries.find(
+    (country) => country.name === theStudent.country
+  );
+
+  res.render("all-the-single-student", {
+    student: theStudent,
+    country: countryOfStudent,
+  });
+});
+
+// /anything
+// /wiki/anything
+// https://www.skyscanner.nl/transport/vluchten/ams/lis/220726/220812/?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27544072&inboundaltsenabled=false&infants=0&originentityid=27536561&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=1
+
+// https://www.google.com/search?q=what+is+the+meaning+of+life&oq=what+is+the+meaning+of+life&aqs=chrome..69i57.2318j0j1&sourceid=chrome&ie=UTF-8
 
 app.get("/wiki/:boomerangFuturamaNissanQashqai", (req, res) => {
   const countrySelected = listOfCountries.find((country) => {
