@@ -35,6 +35,8 @@ const students = [
   { name: "Palash", country: "UAE" },
   { name: "Filipe", country: "Sweeden" },
 ];
+
+// /users/:kira/edit
 // HTTP Verb
 app.get("/", (req, res) => {
   console.log(req.params);
@@ -53,6 +55,10 @@ app.get("/about", (req, res) => {
 app.get("/:student", (req, res) => {
   console.log(req.params);
   console.log(req.query);
+  if (req.params.student === "tiffany") {
+    res.render("another-page");
+    return;
+  }
   const theStudent = students.find(
     (student) => student.name === req.params.student
   );
@@ -70,8 +76,10 @@ app.get("/:student", (req, res) => {
 // /anything
 // /wiki/anything
 // https://www.skyscanner.nl/transport/vluchten/ams/lis/220726/220812/?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27544072&inboundaltsenabled=false&infants=0&originentityid=27536561&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=1
+// query string above: ?adults=1&adultsv2=1&cabinclass=economy&children=0&childrenv2=&destinationentityid=27544072&inboundaltsenabled=false&infants=0&originentityid=27536561&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=1
 
 // https://www.google.com/search?q=what+is+the+meaning+of+life&oq=what+is+the+meaning+of+life&aqs=chrome..69i57.2318j0j1&sourceid=chrome&ie=UTF-8
+// query string above: ?q=what+is+the+meaning+of+life&oq=what+is+the+meaning+of+life&aqs=chrome..69i57.2318j0j1&sourceid=chrome&ie=UTF-8
 
 app.get("/wiki/:boomerangFuturamaNissanQashqai", (req, res) => {
   const countrySelected = listOfCountries.find((country) => {
@@ -81,6 +89,15 @@ app.get("/wiki/:boomerangFuturamaNissanQashqai", (req, res) => {
     description: countrySelected.description,
   });
 });
+
+app.get(
+  "/:aparamhere/:asecondone/:banana/:multilevelmarketing/:timeshare/:gunsandroses",
+  () => {
+    // /hello/pelayo/how/are/you/doing
+    // req.params
+    // {aparamhere: hello, asecondone: pelayo, banana: how, multilevelmarketing: are, timeshare: you, gunsandroses: doing}
+  }
+);
 
 app.listen(3000, () => {
   console.log("Server listening on port 3000");
